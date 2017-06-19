@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>---游戏模块--设计</title>
+	<meta charset="utf-8">
+</head>
+<body>
+<ol>
+	<li><span>先用硬数据进行编码---</span>
+		<ul>
+			<li>为了快速开发，先实现可见性功能的重要性是显而易见的</li>
+			<li>游戏界面--操作---变化----</li>
+		</ul>
+	</li>
+	<li><span>设计数据结构</span>
+		<ul>
+			<li><span>蛇身特点</span>
+				<ul>
+					<li>线性-----</li>
+					<li>动态插入新节点--dynamic
+						<ul>
+							<li>节点特征：</li>
+							<li>坐标x-y</li>
+							<li>---</li>
+							<li>Point</li>
+						</ul>
+					</li>
+					<li><span>ArrayList</span></li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+	<li><span>设计动画</span>
+		<ul>
+			<li>整体结构分为左右两部分，左边为游戏区，右边为状态区</li>
+			<li>使用基本线条绘制</li>
+			<li><span>蛇身节点为正方形，边长x1</span></li>
+			<li><span>蛇头为原型半径(1+1/2)*x1</span></li>
+			<li><span>食物为圆形,半径x1*1/2</span></li>
+		</ul>
+	</li>
+	<li><span>设计运行线程</span>
+		<ul>
+			<li><span>在运行中唯一发生数据扰动的就是吃到食物的那</span>
+				<ul>
+					<li><span>前进----method----m1</span></li>
+					<li><span>判断改动情况</span>
+						<ul>
+							<li><span>改变方向</span></li>
+							<li><span>吃到食物</span>
+
+							</li>
+							<li><span>失败情况</span>
+								<ul>
+									<li><span>撞到墙</span></li>
+									<li><span>撞到自己</span></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><span>控制执行流程</span>
+				<ul>
+					<li><span>转念一想：不用再加两个:</span></li>
+					<li><span>线程1：：执行动画：：表现形式:：</span>
+						<ul>
+							<li><span>把前进逻辑添加进来--</span></li>
+							<li><span>原因：执行动画和前进计算频率相当</span></li>
+						</ul>
+					</li>
+					<li><span>线程2：：状态改变：：</span>
+					    <ul>
+					    	<li>原因：触发</li>
+					    </ul>
+					</li>
+
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+	<li><span>隐藏宽度</span>
+		<ul>
+			<li><span>标题栏高度：30</span></li>
+		</ul>
+	</li>
+	<li><span>问题：：</span>
+		<ul>
+			<li>这个按键事件响应不了,好像只有jframe能识别</li>
+			<li>自定义按钮:<a href="http://blog.csdn.net/sunsnowad/article/details/4393568">boke</a></li>
+			<li>自定义按钮<a href="http://www.cnblogs.com/literature/archive/2009/07/07/gui.html">
+				bk1</a>
+			</li>
+			<li>自定义按钮显示在自定义面板上有问题:
+				<ul>
+					<li>是背景色的问题，我不会改</li>
+					<li>绕过去，把这种交互控件放到右半侧---</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</ol>
+</body>
+</html>
