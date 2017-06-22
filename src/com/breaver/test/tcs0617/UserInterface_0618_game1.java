@@ -5,9 +5,13 @@ package com.breaver.test.tcs0617;
 
 import java.awt.CardLayout;
 import java.awt.Dimension;
+import java.awt.KeyboardFocusManager;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.breaver.formal.button.ButtonBack;
@@ -28,6 +32,7 @@ public class UserInterface_0618_game1 extends JFrame {
 	/**
 	 * 清除多余警告--有利于编码的不冗余，从侧面保证代码简洁，一般简洁就意味着高效
 	 */
+	private int tim_count_key=0;
 	private static final long serialVersionUID = -4197985112997095921L;
 	private JPanel panelFirst = new JPanel();
 	private JPanelGame game = new JPanelGame();
@@ -64,7 +69,52 @@ public class UserInterface_0618_game1 extends JFrame {
 	}
 	//--------------------step3_2_2-----------game-------
 	public void configChildGame(){
+		//内部初始化完成---------------step3_2_2_1---------------
+		//监听输入方向-----------------step322_2--------无效-------
+		//----------退一步在frame上-------问题是非game-pane也会事件响应---
+		//-----解决方法------事件发生对当前所在页面判断---------
+//		panelFirst.requestFocus();
+		game.addKeyListener(new KeyListener() {
 		
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				System.out.println("hello");
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				System.out.println("hello");
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+				System.out.println("按下"+(tim_count_key++)
+						+"code:"+e.getKeyCode());
+			}
+		});
+		/*game.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+				JOptionPane.showMessageDialog(game, "press");
+			}
+		});*/
 	}
 	//开始配置不同项---------step3_2--------------------------
 	//--------------------step3_2_1-----------menu-------------
@@ -133,7 +183,8 @@ public class UserInterface_0618_game1 extends JFrame {
 		//布置每个转换页----------------step3-------------
 		configEveryPageCommonOptions();
 		configChildMenu();
-		
+		configChildGame();
+		game.setFocusable(true);
 	}
 	//设置基本JFrame层-----------step1---------------
 	public UserInterface_0618_game1() {
@@ -145,6 +196,32 @@ public class UserInterface_0618_game1 extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
 		init();
+//		System.out.println(game.requestDefaultFocus());
+//		game.requestFocus();
+//		game.nextFocus();
+		/*System.out.println(KeyboardFocusManager.getCurrentKeyboardFocusManager()
+				.getFocusedWindow());*/
+		/*this.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+				System.out.println("frame");
+			}
+		});*/
+//		this.setFocusable(true);
 		this.setVisible(true);
 	}
 	/**
